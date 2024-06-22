@@ -1,8 +1,20 @@
-import { ReactNode, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-function EditableText({ children }: { children: ReactNode }) {
+function EditableText({
+  value,
+  onEdit,
+}: {
+  value: string;
+  onEdit: (value: string) => void;
+}) {
+  const [text, setText] = useState(value);
   const [isEditing, setIsEditing] = useState(false);
   const textContainer = useRef<HTMLDivElement>(null);
+
+  const handleSubmit = () => {
+    setIsEditing(false);
+    onEdit(text);
+  };
 
   return (
     <div className="flex">
@@ -10,14 +22,21 @@ function EditableText({ children }: { children: ReactNode }) {
         <>
           <input
             type="text"
-            className="flex"
+            className="flex outline-none border-b border-blue-500"
             style={{
               width: `${textContainer.current?.clientWidth}px` ?? "auto",
             }}
-            defaultValue={children as string}
+            value={text}
+            // defaultValue={children as string}
             onBlur={() => {
               setIsEditing(false);
             }}
+            onKeyUp={(event) => {
+              if (event.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+            onChange={(event) => setText(event.target.value)}
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +45,7 @@ function EditableText({ children }: { children: ReactNode }) {
             strokeWidth="1.5"
             stroke="currentColor"
             className="size-4 inline-block ml-2 cursor-pointer hover:text-blue-500"
-            onClick={() => setIsEditing(false)}
+            onClick={handleSubmit}
           >
             <path
               strokeLinecap="round"
@@ -37,7 +56,7 @@ function EditableText({ children }: { children: ReactNode }) {
         </>
       ) : (
         <>
-          <div ref={textContainer}>{children}</div>
+          <div ref={textContainer}>{text}</div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

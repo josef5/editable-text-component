@@ -1,16 +1,13 @@
+import { useState } from "react";
 import "./App.css";
 import EditableText from "./components/EditableText";
 
 function App() {
+  const [text, setText] = useState("Lorem ipsum dolor sit amet consectetur");
+
   return (
     <>
-      <EditableText>
-        Lorem ipsum dolor sit amet consectetur{" "}
-        {/* adipisicing elit. Porro ducimus
-        aspernatur sint eveniet dolore exercitationem, facilis autem ullam
-        adipisci. Fugiat nulla unde, maxime et quis eveniet consectetur quas.
-        Laborum, quod. */}
-      </EditableText>
+      <EditableText value={text} onEdit={(value) => setText(value)} />
     </>
   );
 }
