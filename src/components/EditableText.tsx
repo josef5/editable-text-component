@@ -22,15 +22,14 @@ function EditableText({
         <>
           <input
             type="text"
-            className="flex outline-none border-b border-blue-500"
+            className="flex outline-none border-b-2 box-content border-blue-500"
             style={{
               width: `${textContainer.current?.clientWidth}px` ?? "auto",
             }}
             value={text}
-            // defaultValue={children as string}
-            onBlur={() => {
-              setIsEditing(false);
-            }}
+            // onBlur={() => {
+            //   setIsEditing(false);
+            // }}
             onKeyUp={(event) => {
               if (event.key === "Enter") {
                 handleSubmit();
@@ -40,17 +39,15 @@ function EditableText({
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="size-4 inline-block ml-2 cursor-pointer hover:text-blue-500"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="size-3 inline-block ml-2 cursor-pointer hover:text-blue-500"
             onClick={handleSubmit}
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m4.5 12.75 6 6 9-13.5"
+              fillRule="evenodd"
+              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm3.844-8.791a.75.75 0 0 0-1.188-.918l-3.7 4.79-1.649-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043l4.25-5.5Z"
+              clipRule="evenodd"
             />
           </svg>
         </>
@@ -59,18 +56,13 @@ function EditableText({
           <div ref={textContainer}>{text}</div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-4 inline-block ml-2 cursor-pointer hover:text-blue-500"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="size-3 inline-block ml-2 cursor-pointer hover:text-blue-500"
             onClick={() => setIsEditing(true)}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
+            <path d="M13.488 2.513a1.75 1.75 0 0 0-2.475 0L6.75 6.774a2.75 2.75 0 0 0-.596.892l-.848 2.047a.75.75 0 0 0 .98.98l2.047-.848a2.75 2.75 0 0 0 .892-.596l4.261-4.262a1.75 1.75 0 0 0 0-2.474Z" />
+            <path d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25V9A.75.75 0 0 1 14 9v2.25A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2H7a.75.75 0 0 1 0 1.5H4.75Z" />
           </svg>
         </>
       )}
