@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function EditableText({
   value,
@@ -9,12 +9,19 @@ function EditableText({
 }) {
   const [text, setText] = useState(value);
   const [isEditing, setIsEditing] = useState(false);
-  const textContainer = useRef<HTMLDivElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
     setIsEditing(false);
     onEdit(text);
   };
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.select(); // select all text in the input field
+    }
+  }, [isEditing]);
 
   return (
     <div className="flex">
@@ -22,9 +29,10 @@ function EditableText({
         <>
           <input
             type="text"
+            ref={inputRef}
             className="flex outline-none border-b-2 border-blue-500"
             style={{
-              width: `${textContainer.current?.clientWidth}px` ?? "auto",
+              width: `${textContainerRef.current?.clientWidth}px` ?? "auto",
             }}
             value={text}
             // onBlur={() => {
@@ -53,7 +61,7 @@ function EditableText({
         </>
       ) : (
         <div className="group parent-element flex">
-          <div ref={textContainer} className="border-b-2 border-transparent">
+          <div ref={textContainerRef} className="border-b-2 border-transparent">
             {text}
           </div>
           <svg
