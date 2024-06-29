@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import EditableText from "./components/EditableText";
 
 function App() {

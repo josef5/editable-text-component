@@ -35,9 +35,6 @@ function EditableText({
               width: `${textContainerRef.current?.clientWidth}px` ?? "auto",
             }}
             value={text}
-            // onBlur={() => {
-            //   setIsEditing(false);
-            // }}
             onKeyUp={(event) => {
               if (event.key === "Enter") {
                 handleSubmit();
