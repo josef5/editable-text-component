@@ -1,8 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import EditableText from "./components/EditableText";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
-  const [text, setText] = useState("Lorem ipsum dolor sit amet consectetur");
+  const [text, setText] = useLocalStorage(
+    "text",
+    "Lorem ipsum dolor sit amet consectetur"
+  );
 
   return (
     <>
